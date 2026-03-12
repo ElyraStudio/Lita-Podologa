@@ -35,7 +35,8 @@ const AboutSection = () => (
           </h2>
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
-              Angelita Machmann Francisco é profissional da área de podologia com <strong className="text-foreground">mais de 10 anos de experiência</strong>, dedicada ao cuidado, saúde e bem-estar dos pés.
+              Angelita Machmann Francisco é profissional da área de podologia com <strong className="text-foreground">mais de 10 anos de experiência</strong>, dedicada ao cuidado, saúde e bem-estar dos pés. oferecendo
+  podologia humanizada e cuidados especializado em pés diabéticos.
             </p>
             <p>
               Ao longo da sua trajetória, realizou diversas certificações e especializações, buscando sempre oferecer um atendimento seguro, atualizado e de alta qualidade para seus clientes.

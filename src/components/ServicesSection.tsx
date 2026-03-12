@@ -19,7 +19,7 @@ const services = [
   },
   {
     icon: HeartPulse,
-    title: "Cuidados com Pés Sensíveis",
+    title: "Cuidados com Pés Sensíveis e diabéticos",
     description: "Atenção especial para manter a saúde dos pés com procedimentos adequados.",
   },
   {
