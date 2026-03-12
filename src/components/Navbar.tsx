@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { label: "Sobre", href: "#sobre" },
@@ -12,25 +13,48 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 50);
+    const handler = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-40 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-transparent"}`}>
-      <div className="container mx-auto flex items-center justify-between px-4 py-4">
-        <a href="#" className={`font-display text-xl font-bold transition-colors ${scrolled ? "text-foreground" : ""}`} style={scrolled ? {} : { color: "white" }}>
-          Lita Machmann <span className="text-gold">Podologia</span>
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-background/95 backdrop-blur-md shadow-md"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto flex items-center justify-between px-5 py-4">
+        
+        {/* Logo */}
+        <a
+          href="#"
+          className="text-2xl font-semibold tracking-tight transition-all"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            color: scrolled ? "" : "white",
+          }}
+        >
+          <span className="text-gold">Podologia</span>
         </a>
 
-        {/* Desktop */}
+        {/* Desktop menu */}
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className={`text-sm font-medium transition-colors hover:text-gold ${scrolled ? "text-foreground" : ""}`} style={scrolled ? {} : { color: "hsl(40 20% 90%)" }}>
+            <a
+              key={l.href}
+              href={l.href}
+              className={`text-sm font-medium transition-all hover:text-gold ${
+                scrolled ? "text-foreground" : ""
+              }`}
+              style={scrolled ? {} : { color: "hsl(40 20% 90%)" }}
+            >
               {l.label}
             </a>
           ))}
+
           <a
             href="https://wa.me/5551993631514"
             target="_blank"
@@ -42,31 +66,55 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Mobile toggle */}
-        <button onClick={() => setOpen(!open)} className="md:hidden" style={scrolled ? {} : { color: "white" }}>
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {/* Mobile button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden relative z-50"
+          style={scrolled ? {} : { color: "white" }}
+        >
+          {open ? (
+            <X className="w-7 h-7 transition-transform rotate-90" />
+          ) : (
+            <Menu className="w-7 h-7 transition-transform hover:scale-110" />
+          )}
         </button>
       </div>
 
       {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-background border-t border-border px-4 pb-4">
-          {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="block py-3 text-foreground font-medium hover:text-gold">
-              {l.label}
-            </a>
-          ))}
-          <a
-            href="https://wa.me/5551993631514"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block mt-2 text-center gold-gradient px-5 py-3 rounded-full font-semibold"
-            style={{ color: "white" }}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35 }}
+            className="md:hidden bg-background border-t border-border shadow-lg"
           >
-            Agendar pelo WhatsApp
-          </a>
-        </div>
-      )}
+            <div className="flex flex-col px-6 py-6 gap-4">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="text-lg font-medium text-foreground hover:text-gold transition"
+                >
+                  {l.label}
+                </a>
+              ))}
+
+              <a
+                href="https://wa.me/5551993631514"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 text-center gold-gradient px-6 py-3 rounded-full font-semibold hover:scale-105 transition-transform"
+                style={{ color: "white" }}
+              >
+                Agendar pelo WhatsApp
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

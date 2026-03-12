@@ -1,62 +1,155 @@
-import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Star, Instagram } from "lucide-react";
+import { useState, useEffect } from "react";
 
-const testimonials = [
+const reviews = [
   {
-    name: "Maria S.",
-    text: "Excelente atendimento, muito profissional e cuidadosa. Recomendo de olhos fechados!",
+    name: "Helena Ferreira da Costa Pivoto",
+    text: "Maravilhosa, a Angelita é muito atenciosa, delicada e competente sempre procurando a melhor forma de proceder para que a cliente se sinta segura, sem nenhum incomodo. 100% satisfeita.",
+    time: "4 meses atrás",
   },
   {
-    name: "Carla R.",
-    text: "Atendimento impecável, ambiente muito limpo e acolhedor. Me senti muito segura.",
+    name: "Rômulo Prado",
+    text: "Podóloga incrível! Resolveu o problema que me perseguia a mais de um ano em apenas 3 atendimentos. Querida, atenciosa e extremamente profissional.",
+    time: "1 mês atrás",
   },
   {
-    name: "Joana L.",
-    text: "Profissional extremamente dedicada e atenciosa. Meus pés nunca estiveram tão bem cuidados.",
+    name: "Ellen Daniberg",
+    text: "Excelente profissional, ambiente maravilhoso! Merece avaliação máxima!!!",
+    time: "1 ano atrás",
   },
 ];
 
-const Stars = () => (
-  <div className="flex gap-1 mb-4">
-    {Array.from({ length: 5 }).map((_, i) => (
-      <Star key={i} className="w-4 h-4 fill-gold text-gold" />
-    ))}
-  </div>
-);
+const SocialSection = () => {
+  const [index, setIndex] = useState(0);
 
-const TestimonialsSection = () => (
-  <section className="section-padding bg-background">
-    <div className="container mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-16"
-      >
-        <span className="text-sm font-semibold uppercase tracking-widest text-gold mb-3 block">Depoimentos</span>
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground">O que dizem nossos clientes</h2>
-      </motion.div>
+  const next = () => {
+    setIndex((prev) => (prev + 1) % reviews.length);
+  };
 
-      <div className="grid md:grid-cols-3 gap-8">
-        {testimonials.map((t, i) => (
-          <motion.div
-            key={t.name}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.15 }}
-            className="bg-card rounded-2xl p-8 border border-border relative"
+  const prev = () => {
+    setIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+  };
+
+  // autoplay loop
+  useEffect(() => {
+    const interval = setInterval(() => {
+      next();
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const getPosition = (i: number) => {
+    if (i === index) return "center";
+    if (i === (index + 1) % reviews.length) return "right";
+    if (i === (index - 1 + reviews.length) % reviews.length) return "left";
+    return "hidden";
+  };
+
+  return (
+    <section className="section-padding bg-background overflow-hidden">
+      <div className="container mx-auto px-4">
+
+        {/* Title */}
+        <div className="text-center mb-16">
+          <span className="text-sm font-semibold uppercase tracking-widest text-gold mb-3 block">
+            Avaliações
+          </span>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            O que nossos clientes dizem
+          </h2>
+
+          {/* animated stars */}
+          <div className="flex justify-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                animate={{ scale: [1, 1.25, 1] }}
+                transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+              >
+                <Star className="w-6 h-6 fill-gold text-gold" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Carousel */}
+        <div className="relative flex justify-center items-center h-[320px]">
+
+          <AnimatePresence>
+            {reviews.map((review, i) => {
+              const position = getPosition(i);
+
+              if (position === "hidden") return null;
+
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute bg-card border border-border rounded-2xl p-6 shadow-lg"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{
+                    opacity: position === "center" ? 1 : 0.5,
+                    scale: position === "center" ? 1 : 0.85,
+                    x:
+                      position === "center"
+                        ? 0
+                        : position === "left"
+                        ? -220
+                        : 220,
+                    zIndex: position === "center" ? 10 : 5,
+                  }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  style={{ width: "280px" }}
+                >
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(5)].map((_, s) => (
+                      <Star key={s} className="w-4 h-4 fill-gold text-gold" />
+                    ))}
+                  </div>
+
+                  <p className="text-muted-foreground mb-4 text-sm">
+                    "{review.text}"
+                  </p>
+
+                  <div>
+                    <p className="font-semibold text-foreground">
+                      {review.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {review.time}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+
+        {/* Instagram CTA */}
+        <div className="text-center mt-16">
+
+          <p className="text-muted-foreground mb-6 text-lg">
+            Veja mais conteúdos e dicas sobre saúde dos pés
+          </p>
+
+          <a
+            href="https://www.instagram.com/litamachmannpodologia"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full gold-gradient text-lg font-semibold hover:scale-110 transition-transform duration-300 gold-shadow"
+            style={{ color: "white" }}
           >
-            <Quote className="w-8 h-8 text-gold/20 absolute top-6 right-6" />
-            <Stars />
-            <p className="text-muted-foreground leading-relaxed mb-6 italic">"{t.text}"</p>
-            <p className="font-semibold text-foreground">{t.name}</p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
+            <Instagram className="w-6 h-6" />
+            @litamachmannpodologia
+          </a>
 
-export default TestimonialsSection;
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default SocialSection;
