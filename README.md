@@ -1,73 +1,96 @@
-# Welcome to your Lovable project
+# 🌿 Lita Machmann Podologia — Landing Page
 
-## Project info
+Landing page profissional desenvolvida para apresentar os serviços de podologia da **Lita Machmann**, com foco em conversão de clientes, design elegante e experiência moderna.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+O site foi projetado para transmitir **confiança, cuidado e profissionalismo**, facilitando o contato direto via WhatsApp.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🌐 Acesse o site
 
-**Use Lovable**
+🔗 https://elyra-b1op.vercel.app/
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## ✨ Funcionalidades
 
-**Use your preferred IDE**
+* Layout moderno e responsivo
+* Seções animadas com **Framer Motion**
+* CTA otimizada para conversão via WhatsApp
+* Integração com **Instagram**
+* Avaliações destacadas
+* Design elegante com paleta dourada
+* Otimizado para **mobile e desktop**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🛠️ Tecnologias utilizadas
 
-Follow these steps:
+* **React**
+* **TypeScript**
+* **Tailwind CSS**
+* **Framer Motion**
+* **Lucide Icons**
+* **Vite**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 📱 Responsividade
 
-# Step 3: Install the necessary dependencies.
-npm i
+O site foi desenvolvido com abordagem **mobile-first**, garantindo ótima experiência em:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+* 📱 Smartphones
+* 💻 Desktops
+* 📟 Tablets
+
+---
+
+## 🚀 Como rodar o projeto
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/Leonard0MF/NOME-DO-REPO.git
+```
+
+Entre na pasta:
+
+```bash
+cd NOME-DO-REPO
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Rode o projeto:
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🎨 Objetivo do projeto
 
-**Use GitHub Codespaces**
+Este projeto foi criado para:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+* Criar presença digital profissional
+* Facilitar o agendamento de clientes
+* Demonstrar habilidades de **frontend moderno**
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 👨‍💻 Desenvolvimento
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Desenvolvido por **Elyra**
 
-## How can I deploy this project?
+🔗 https://elyra-b1op.vercel.app/
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## 📄 Licença
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Este projeto foi desenvolvido para uso específico do cliente.
